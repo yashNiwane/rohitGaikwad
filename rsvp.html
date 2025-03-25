@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP - Rohit & Vrushali's Engagement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .font-cursive {
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #fdf2f8, #fce7f3);
+            min-height: 100vh;
+        }
+
+        .form-input {
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #ec4899;
+            box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.2);
+        }
+
+        .submit-button {
+            transition: all 0.3s ease;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-pink-500 text-white py-4 px-6 shadow-lg">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="font-cursive text-2xl">RSVP</h1>
+            <div class="flex gap-4">
+                <a href="index.html" class="hover:text-pink-200 transition-colors">Home</a>
+                <a href="photos_page.html" class="hover:text-pink-200 transition-colors">Photos</a>
+                <a href="love_story.html" class="hover:text-pink-200 transition-colors">Our Story</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-2xl mx-auto py-12 px-6">
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+            <h2 class="text-4xl font-cursive text-pink-600 text-center mb-8">Join Our Celebration</h2>
+            <p class="text-gray-600 text-center mb-8">
+                We would be honored to have you join us on our special day.<br>
+                Please RSVP by May 15, 2025
+            </p>
+
+            <form id="rsvp-form" class="space-y-6">
+                <div class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-gray-700 mb-2">Full Name</label>
+                        <input type="text" id="name" name="name" required
+                            class="form-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-gray-700 mb-2">Email Address</label>
+                        <input type="email" id="email" name="email" required
+                            class="form-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label for="guests" class="block text-gray-700 mb-2">Number of Guests</label>
+                        <select id="guests" name="guests" required
+                            class="form-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="attendance" class="block text-gray-700 mb-2">Will you be attending?</label>
+                        <div class="space-x-4">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="attendance" value="yes" required
+                                    class="form-radio text-pink-500">
+                                <span class="ml-2">Joyfully Accept</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="attendance" value="no" required
+                                    class="form-radio text-pink-500">
+                                <span class="ml-2">Regretfully Decline</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-gray-700 mb-2">Message for the Couple (Optional)</label>
+                        <textarea id="message" name="message" rows="4"
+                            class="form-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit"
+                    class="submit-button w-full bg-pink-500 text-white py-3 rounded-lg hover:bg-pink-600 focus:outline-none">
+                    Send RSVP
+                </button>
+            </form>
+
+            <div id="success-message" class="hidden mt-6 p-4 bg-green-100 text-green-700 rounded-lg">
+                Thank you for your RSVP! We look forward to celebrating with you.
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('rsvp-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would typically send the form data to a server
+            // For demo purposes, we'll just show the success message
+            document.getElementById('success-message').classList.remove('hidden');
+            this.reset();
+            setTimeout(() => {
+                document.getElementById('success-message').classList.add('hidden');
+            }, 5000);
+        });
+    </script>
+</body>
+</html> 

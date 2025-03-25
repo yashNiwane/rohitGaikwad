@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohit & Vrushali's Beautiful Memories</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .font-cursive {
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+        }
+        
+        /* Carousel styling and animations */
+        .carousel {
+            perspective: 1500px;
+            height: 400px;
+            position: relative;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .carousel-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .carousel-item {
+            position: absolute;
+            width: 260px;
+            height: 360px;
+            transform-style: preserve-3d;
+            transition: all 0.8s ease;
+            cursor: pointer;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            transform-origin: center center;
+        }
+        
+        .carousel-item.active-slide {
+            transform: translateX(0) scale(1.1) !important;
+            z-index: 10;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+        
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            pointer-events: none;
+        }
+        
+        .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            color: white;
+            font-size: 0.875rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .carousel-item.active-slide .caption {
+            opacity: 1;
+        }
+        
+        /* Star particles animation */
+        .star {
+            position: absolute;
+            background-color: white;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            animation: twinkle 4s infinite;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+        
+        /* Page title glow effect */
+        .title-glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #e60073, 0 0 20px #e60073;
+            }
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 20px #ff4da6, 0 0 30px #ff4da6, 0 0 40px #ff4da6;
+            }
+        }
+        
+        /* Footer magic effect */
+        .footer-magic {
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+        }
+        
+        .footer-magic::after {
+            content: "✨";
+            position: absolute;
+            right: -15px;
+            top: 0;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes sparkle {
+            0% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.5; transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .carousel-item {
+                width: 150px;
+                height: 225px;
+            }
+            
+            .carousel {
+                height: 80vh;
+                max-height: 400px;
+            }
+            
+            .title-glow {
+                font-size: 2rem;
+            }
+            
+            .navigation-buttons {
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-item {
+                width: 120px;
+                height: 180px;
+            }
+            
+            .carousel {
+                height: 70vh;
+                max-height: 300px;
+            }
+            
+            .title-glow {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Photo preview modal styles */
+        .photo-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.1);
+        }
+
+        /* Enhanced carousel item styles */
+        .carousel-item:hover {
+            transform: scale(1.05) translateZ(20px);
+        }
+
+        /* Touch feedback */
+        .carousel-item:active {
+            transform: scale(0.95);
+        }
+
+        /* Keyboard focus styles */
+        .carousel-item:focus {
+            outline: 2px solid #e60073;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Add photo preview modal -->
+    <div id="photo-modal" class="photo-modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <img id="modal-image" src="" alt="Preview">
+        </div>
+    </div>
+
+    <div id="container" class="w-full h-screen absolute inset-0">
+        <canvas id="canvas" class="w-full h-full"></canvas>
+    </div>
+    
+    <div class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center z-10">
+        <!-- Navigation -->
+        <div class="absolute top-4 right-4 flex gap-4">
+            <a href="index.html" class="px-4 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-colors">
+                Home
+            </a>
+            <a href="love_story.html" class="px-4 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-colors">
+                Our Story
+            </a>
+            <a href="rsvp.html" class="px-4 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-colors">
+                RSVP
+            </a>
+        </div>
+        
+        <!-- Title -->
+        <div class="mb-8 text-center">
+            <h1 class="font-cursive text-4xl text-white title-glow">Rohit & Vrushali's Beautiful Memories</h1>
+        </div>
+        
+        <!-- Photo Carousel -->
+        <div id="carousel" class="carousel relative w-full max-w-4xl">
+            <div id="carousel-container" class="carousel-container">
+                <!-- Photos will be dynamically added here -->
+            </div>
+        </div>
+        
+        <!-- Footer text -->
+        <div class="absolute bottom-5 text-white text-sm opacity-80">
+            <p class="footer-magic">Every moment with you is pure magic</p>
+        </div>
+    </div>
+
+    <script>
+        // Three.js setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ 
+            canvas: document.getElementById('canvas'),
+            alpha: true 
+        });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        
+        // Gradient background using CSS
+        document.getElementById('container').className = 
+            'w-full h-screen absolute inset-0 bg-gradient-to-br from-purple-900 via-purple-700 to-pink-600';
+        
+        // Create stars
+        const starGeometry = new THREE.SphereGeometry(0.1, 32, 32);
+        const starMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        // Enhanced star animation
+        function createStars() {
+            for (let i = 0; i < 600; i++) {
+                const star = new THREE.Mesh(starGeometry, starMaterial);
+                star.position.set(
+                    Math.random() * 150 - 75,
+                    Math.random() * 150 - 75,
+                    Math.random() * 100 - 50
+                );
+                star.scale.setScalar(Math.random() * 0.5 + 0.2);
+                star.userData.originalY = star.position.y;
+                star.userData.speed = Math.random() * 0.01 + 0.005;
+                scene.add(star);
+            }
+        }
+        
+        // Add some animated particles
+        function addStarParticles() {
+            const container = document.getElementById('container');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 4}s`;
+                star.style.opacity = `${Math.random() * 0.5 + 0.3}`;
+                container.appendChild(star);
+            }
+        }
+        
+        // Carousel setup
+        function setupCarousel() {
+            const carouselContainer = document.getElementById('carousel-container');
+            const carousel = document.getElementById('carousel');
+            
+            const photos = [
+                {
+                    url: "https://images.unsplash.com/photo-1582152629442-4a864303fb96",
+                    caption: "Our first adventure together"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1513279922550-250c2129b13a",
+                    caption: "The day we decided forever"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1517821099606-cef63a9bcda6",
+                    caption: "Summer memories together"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1600603405959-6d623e92445c",
+                    caption: "Celebrating our special day"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e",
+                    caption: "That beautiful sunset"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1612293682996-6e4a77a3ed47",
+                    caption: "Our favorite coffee date"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1519699047748-de8e457a634e",
+                    caption: "Walking in the park"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2",
+                    caption: "Beach day memories"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486",
+                    caption: "Dancing in the rain"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963",
+                    caption: "Our Italian getaway"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1523438885200-e635ba2c371e",
+                    caption: "Garden picnic day"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1516205651411-aef33a44f7c2",
+                    caption: "Sunset at the beach"
+                },
+                
+            ];
+            
+            // Clear existing items
+            carouselContainer.innerHTML = "";
+            
+            // Create carousel items
+            photos.forEach((photo, index) => {
+                const item = document.createElement('div');
+                item.className = 'carousel-item';
+                item.dataset.index = index;
+                item.innerHTML = `
+                    <img src="${photo.url}" alt="Memory ${index + 1}">
+                    <div class="caption">${photo.caption}</div>
+                `;
+                carouselContainer.appendChild(item);
+            });
+
+            // Setup carousel navigation
+            let currentIndex = 0;
+            const items = carouselContainer.querySelectorAll('.carousel-item');
+            const totalItems = items.length;
+            
+            function positionItems() {
+                const radius = window.innerWidth < 768 ? 300 : 450; // Increased radius
+                const theta = (2 * Math.PI) / totalItems;
+                
+                items.forEach((item, index) => {
+                    const angle = theta * (index - currentIndex);
+                    const x = Math.sin(angle) * radius;
+                    const z = (Math.cos(angle) * radius) - radius;
+                    const scale = index === currentIndex ? 1.1 : 0.8;
+                    const opacity = index === currentIndex ? 1 : 0.6;
+                    const rotateY = -angle * (180 / Math.PI); // Convert radians to degrees
+                    
+                    item.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${rotateY}deg) scale(${scale})`;
+                    item.style.opacity = opacity;
+                    item.style.zIndex = index === currentIndex ? 10 : Math.round(5 + (z / radius) * 5);
+                    item.classList.toggle('active-slide', index === currentIndex);
+                });
+            }
+
+            // Initial positioning
+            positionItems();
+
+            // Auto rotate every 3 seconds
+            let autoRotateInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % totalItems;
+                positionItems();
+            }, 3000);
+
+            // Pause rotation on hover
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(autoRotateInterval);
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                autoRotateInterval = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % totalItems;
+                    positionItems();
+                }, 3000);
+            });
+
+            // Click navigation
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    const clickedIndex = parseInt(item.dataset.index);
+                    if (clickedIndex === currentIndex) return;
+                    
+                    currentIndex = clickedIndex;
+                    positionItems();
+                });
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                positionItems();
+            });
+
+            return { positionItems, totalItems };
+        }
+        
+        // Photo preview functionality
+        function setupPhotoPreview() {
+            const modal = document.getElementById('photo-modal');
+            const modalImg = document.getElementById('modal-image');
+            const closeBtn = document.querySelector('.modal-close');
+
+            document.querySelectorAll('.carousel-item img').forEach(img => {
+                img.addEventListener('click', () => {
+                    modalImg.src = img.src;
+                    modal.classList.add('active');
+                });
+            });
+
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        }
+
+        // Touch support for carousel
+        function setupTouchSupport() {
+            const carousel = document.getElementById('carousel');
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            carousel.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            });
+
+            carousel.addEventListener('touchmove', (e) => {
+                touchEndX = e.touches[0].clientX;
+            });
+
+            carousel.addEventListener('touchend', () => {
+                const swipeDistance = touchStartX - touchEndX;
+                if (Math.abs(swipeDistance) > 50) {
+                    if (swipeDistance > 0) {
+                        // Swipe left
+                        currentIndex = (currentIndex + 1) % totalItems;
+                    } else {
+                        // Swipe right
+                        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                    }
+                    positionItems();
+                }
+            });
+        }
+
+        // Keyboard navigation
+        function setupKeyboardNavigation() {
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                } else if (e.key === 'ArrowRight') {
+                    currentIndex = (currentIndex + 1) % totalItems;
+                } else if (e.key === 'Escape') {
+                    document.getElementById('photo-modal').classList.remove('active');
+                }
+                positionItems();
+            });
+        }
+
+        // Enhanced animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Rotate stars with enhanced movement
+            scene.children.forEach(child => {
+                if (child.userData.originalY !== undefined) {
+                    child.rotation.x += 0.0003;
+                    child.rotation.y += 0.0003;
+                    child.position.y += child.userData.speed;
+                    
+                    // Reset position with slight variation
+                    if (child.position.y > 75) {
+                        child.position.y = -75;
+                        child.position.x = Math.random() * 150 - 75;
+                        child.userData.speed = Math.random() * 0.01 + 0.005;
+                    }
+                }
+            });
+            
+            renderer.render(scene, camera);
+        }
+
+        // Initialize everything
+        function init() {
+            camera.position.z = 50;
+            createStars();
+            addStarParticles();
+            setupCarousel();
+            setupPhotoPreview();
+            setupTouchSupport();
+            setupKeyboardNavigation();
+            animate();
+        }
+
+        // Start initialization
+        init();
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
