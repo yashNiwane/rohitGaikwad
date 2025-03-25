@@ -54,9 +54,42 @@
             justify-content: center;
             color: white;
         }
+
+        .audio-player {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(236, 72, 153, 0.1);
+            padding: 10px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .audio-player audio {
+            height: 30px;
+        }
+
+        .audio-title {
+            color: #ec4899;
+            font-size: 0.875rem;
+            margin-right: 10px;
+            text-shadow: 0 0 10px rgba(236, 72, 153, 0.3);
+        }
     </style>
 </head>
 <body>
+    <div class="audio-player">
+        <span class="audio-title">♫ Toss</span>
+        <audio controls autoplay loop>
+            <source src="toss.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
     <!-- Navigation -->
     <nav class="bg-pink-500 text-white py-4 px-6 shadow-lg">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
