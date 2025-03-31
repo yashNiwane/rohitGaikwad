@@ -66,7 +66,7 @@
         
         @keyframes glow {
             from {
-                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #e60073, 0 0 20px #e60073;
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #290115, 0 0 20px #450023;
             }
             to {
                 text-shadow: 0 0 10px #fff, 0 0 20px #ff4da6, 0 0 30px #ff4da6, 0 0 40px #ff4da6;
@@ -181,8 +181,8 @@
         }
         
         @keyframes gentlePulse {
-            0%, 100% { box-shadow: 0 10px 30px rgba(248, 113, 193, 0.2); }
-            50% { box-shadow: 0 10px 35px rgba(248, 113, 193, 0.35); }
+            0%, 100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
+            50% { box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35); }
         }
         
         /* Image transition effects */
@@ -302,24 +302,24 @@
     <div id="eventModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2 class="text-2xl text-pink-800 font-cursive mb-4">Engagement Ceremony Details</h2>
+            <h2 class="text-2xl text-A1E3F9-800 font-cursive mb-4">Engagement Ceremony Details</h2>
             <div class="space-y-4">
                 <div>
-                    <h3 class="text-lg text-pink-700 font-medium">When</h3>
+                    <h3 class="text-lg text-A1E3F9-700 font-medium">When</h3>
                     <p class="text-gray-800">Saturday, June 15, 2024 at 5:00 PM</p>
                 </div>
                 <div>
-                    <h3 class="text-lg text-pink-700 font-medium">Where</h3>
+                    <h3 class="text-lg text-A1E3F9-700 font-medium">Where</h3>
                     <p class="text-gray-800">The Grand Hall</p>
                     <p class="text-gray-800">123 Celebration Avenue</p>
                     <p class="text-gray-800">Cityville, State 12345</p>
                 </div>
                 <div>
-                    <h3 class="text-lg text-pink-700 font-medium">Attire</h3>
+                    <h3 class="text-lg text-A1E3F9-700 font-medium">Attire</h3>
                     <p class="text-gray-800">Semi-formal</p>
                 </div>
                 <div>
-                    <h3 class="text-lg text-pink-700 font-medium">RSVP</h3>
+                    <h3 class="text-lg text-A1E3F9-700 font-medium">RSVP</h3>
                     <p class="text-gray-800">Please respond by May 15, 2024</p>
                     <p class="text-gray-800">Email: rohit@example.com</p>
                 </div>
@@ -327,10 +327,10 @@
         </div>
     </div>
 
-    <div class="audio-player">
+    <div class="audio-player" style="display: none; ">
         <span class="audio-title">♫ Toss</span>
         <audio controls autoplay loop>
-            <source src="toss.mp3" type="audio/mpeg">
+            <source src="toss." type="/mpeg">
             Your browser does not support the audio element.
         </audio>
     </div>
@@ -348,7 +348,7 @@
         
         // Gradient background using Tailwind classes on container
         document.getElementById('container').className = 
-            'w-full h-screen bg-gradient-to-br from-pink-200 via-pink-300 to-pink-400';
+            'w-full h-screen bg-gradient-to-br from-[#A9B5DF] via-[#578FCA] to-[#2D336B]';
 
         // Create stars
         const starGeometry = new THREE.SphereGeometry(0.1, 32, 32);
@@ -397,7 +397,7 @@
         function createGlassyPanel() {
             // Create a container div for the panel
             const panel = document.createElement('div');
-            panel.className = 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[95%] sm:w-[90%] max-w-4xl bg-pink-100 bg-opacity-30 backdrop-blur-md rounded-3xl p-4 sm:p-6 md:p-8 shadow-lg panel-shine panel-gentle-pulse responsive-panel';
+            panel.className = 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[95%] sm:w-[90%] max-w-4xl bg-gradient-to-br from-red-200 via-A1E3F9-300 to-blue-400 bg-opacity-30 backdrop-blur-md rounded-3xl p-4 sm:p-6 md:p-8 shadow-lg panel-shine panel-gentle-pulse responsive-panel';
             panel.style.zIndex = '10';
             panel.style.border = '1px solid rgba(255, 255, 255, 0.2)';
             
@@ -405,30 +405,30 @@
             panel.innerHTML = `
                 <div class="flex flex-col md:flex-row items-center justify-between gap-6">
                     <div class="text-left w-full md:w-4/8">
-                        <h1 class="text-3xl sm:text-4xl md:text-5xl font-cursive text-pink-800 opacity-80 mb-2 md:mb-3 float-text">Our Engagement<br>Celebration</h1>
-                        <p class="text-pink-700 mt-3 md:mt-4 text-xs sm:text-sm opacity-90">Join us as we celebrate the beginning of<br>our forever journey together</p>
+                        <h1 class="text-3xl sm:text-4xl md:text-5xl font-cursive text-A1E3F9-800 opacity-80 mb-2 md:mb-3 float-text">Our Engagement<br>Celebration</h1>
+                        <p class="text-A1E3F9-700 mt-3 md:mt-4 text-xs sm:text-sm opacity-90">Join us as we celebrate the beginning of<br>our forever journey together</p>
                         
                         <div class="mt-4 mb-4">
-                            <p class="text-pink-800 text-sm sm:text-base font-medium">Rohit and Vrushali</p>
-                            <p class="text-pink-700 text-xs sm:text-sm">June 15, 2025 • The Grand Hall</p>
+                            <p class="text-A1E3F9-800 text-sm sm:text-base font-medium">Rohit and Vrushali</p>
+                            <p class="text-A1E3F9-700 text-xs sm:text-sm">June 15, 2025 • The Grand Hall</p>
                             <div class="mt-3 flex items-center justify-start">
-                                <div id="countdown" class="bg-pink-100 bg-opacity-60 text-pink-800 text-xs rounded-lg px-3 py-1 inline-block"></div>
+                                <div id="countdown" class="bg-A1E3F9-100 bg-opacity-60 text-A1E3F9-800 text-xs rounded-lg px-3 py-1 inline-block"></div>
                             </div>
                         </div>
                         
                         <div class="mt-5 md:mt-6 space-y-2 md:space-y-3">
                             <a href="photos_page.html" class="block">
-                                <button class="w-full bg-pink-500 hover:bg-pink-600 text-white py-2 md:py-2.5 px-4 md:px-6 rounded-full shadow-md transition text-sm sm:text-base">
+                                <button class="w-full bg-A1E3F9-500 hover:bg-A1E3F9-600 text-white py-2 md:py-2.5 px-4 md:px-6 rounded-full shadow-md transition text-lg sm:text-xl">
                                     View Photos ✨
                                 </button>
                             </a>
                             <a href="love_story.html" class="block">
-                                <button class="w-full bg-pink-400 hover:bg-pink-500 text-white py-2 md:py-2.5 px-4 md:px-6 rounded-full shadow-md transition text-sm sm:text-base">
+                                <button class="w-full bg-A1E3F9-500 hover:bg-A1E3F9-600 text-white py-2 md:py-2.5 px-4 md:px-6 rounded-full shadow-md transition text-lg sm:text-xl">
                                     Our Love Story 💕
                                 </button>
                             </a>
                             <a href="rsvp.html" class="block">
-                                <button class="w-full bg-pink-400 hover:bg-pink-500 text-white py-2 md:py-2.5 px-4 md:px-6 rounded-full shadow-md transition text-sm sm:text-base">
+                                <button class="w-full bg-A1E3F9-500 hover:bg-A1E3F9-600 text-white py-2 md:py-2.5 px-4 md:px-6 rounded-full shadow-md transition text-lg sm:text-xl">
                                     RSVP Now 📅
                                 </button>
                             </a>
@@ -437,8 +437,8 @@
                     
                     <div class="relative w-full md:w-4/8 h-56 sm:h-64 md:h-80 mt-6 md:mt-0">
                         <div id="images-container" class="relative w-full h-full">
-                            <div class="bg-pink-200 bg-opacity-50 rounded-xl overflow-hidden shadow-md border border-pink-300 border-opacity-50 hover:scale-105 transition-transform duration-300 w-full h-full">
-                                <img src="https://i.pinimg.com/originals/44/1c/2f/441c2f1b7578cfd939570f5650b2a9b8.jpg" alt="Engagement photo" class="w-full h-full object-cover gallery-image">
+                            <div class="bg-A1E3F9-200 bg-opacity-50 rounded-xl overflow-hidden shadow-md border border-A1E3F9-300 border-opacity-50 hover:scale-105 transition-transform duration-300 w-full h-full">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIX4dChTZVbivwhW87xxKfn4MOAsEz6Hms1Q&s" alt="Engagement photo" class="w-full h-full object-cover gallery-image">
                                 <div id="hearts-container" class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
                                     <!-- Hearts will be added here dynamically -->
                                 </div>
@@ -552,9 +552,9 @@
             
             // Engagement ceremony themed images
             const engagementImages = [
-                "https://i.pinimg.com/originals/44/1c/2f/441c2f1b7578cfd939570f5650b2a9b8.jpg", // Engagement ring
-                "https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg", // Couple holding hands
-                "https://images.pexels.com/photos/3014856/pexels-photo-3014856.jpeg" // Engagement celebration
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIX4dChTZVbivwhW87xxKfn4MOAsEz6Hms1Q&s", // Engagement ring
+                "https://images.squarespace-cdn.com/content/v1/54fc8146e4b02a22841f4df7/1687824151184-IZFAM5S69M8KUYR21QAO/cover40.jpg", // Couple holding hands
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIX4dChTZVbivwhW87xxKfn4MOAsEz6Hms1Q&s" // Engagement celebration
             ];
             
             let currentImageIndex = 0;
