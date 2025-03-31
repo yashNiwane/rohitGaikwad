@@ -114,10 +114,10 @@
         
         @keyframes glow {
             from {
-                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #e60073, 0 0 20px #e60073;
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #00e2e6, 0 0 20px #0096e6;
             }
             to {
-                text-shadow: 0 0 10px #fff, 0 0 20px #ff4da6, 0 0 30px #ff4da6, 0 0 40px #ff4da6;
+                text-shadow: 0 0 10px #fff, 0 0 20px #260041, 0 0 30px hsla(222, 100%, 18%, 0.749), 0 0 40px #250044;
             }
         }
         
@@ -276,10 +276,10 @@
     </style>
 </head>
 <body>
-    <div class="audio-player">
+    <div class="audio-player hidden">
         <span class="audio-title">♫ Toss</span>
         <audio controls autoplay loop>
-            <source src="toss.mp3" type="audio/mpeg">
+            <source src="toss" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
     </div>
@@ -296,22 +296,11 @@
     </div>
     
     <div class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center z-10">
-        <!-- Navigation -->
-        <div class="absolute top-4 right-4 flex gap-4">
-            <a href="index.html" class="px-4 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-colors">
-                Home
-            </a>
-            <a href="love_story.html" class="px-4 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-colors">
-                Our Story
-            </a>
-            <a href="rsvp.html" class="px-4 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-colors">
-                RSVP
-            </a>
-        </div>
+        
         
         <!-- Title -->
         <div class="mb-8 text-center">
-            <h1 class="font-cursive text-4xl text-white title-glow">Rohit & Vrushali's Beautiful Memories</h1>
+            <h1 class="font-cursive text-5xl text-white title-glow">Rohit & Vrushali's Beautiful Memories</h1>
         </div>
         
         <!-- Photo Carousel -->
@@ -341,7 +330,7 @@
         
         // Gradient background using CSS
         document.getElementById('container').className = 
-            'w-full h-screen absolute inset-0 bg-gradient-to-br from-purple-900 via-purple-700 to-pink-600';
+            'w-full h-screen bg-gradient-to-br from-[#A9B5DF] via-[#578FCA] to-[#2D336B]0';
         
         // Create stars
         const starGeometry = new THREE.SphereGeometry(0.1, 32, 32);
