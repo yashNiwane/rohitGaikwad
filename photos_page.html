@@ -273,6 +273,74 @@
             margin-right: 10px;
             text-shadow: 0 0 10px rgba(236, 72, 153, 0.3);
         }
+        @media (max-width: 768px) {
+    .carousel-item {
+        width: 200px;  /* Increased from 150px */
+        height: 300px; /* Increased from 225px */
+    }
+    
+    .carousel {
+        height: 70vh;   /* Adjusted height */
+        max-height: 500px;
+        perspective: 1000px; /* Reduced perspective */
+    }
+    
+    .title-glow {
+        font-size: 1.8rem; /* Reduced from 2rem */
+        padding: 0 20px;  /* Added padding */
+    }
+    
+    .navigation-buttons {
+        margin-top: 1rem;
+    }
+
+    /* Center alignment adjustments */
+    .carousel-container {
+        justify-content: center;
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-item {
+        width: 180px;  /* Increased from 120px */
+        height: 270px; /* Increased from 180px */
+    }
+    
+    .carousel {
+        height: 60vh;   /* Adjusted height */
+        max-height: 400px;
+        perspective: 800px; /* Further reduced perspective */
+    }
+    
+    .title-glow {
+        font-size: 1.4rem; /* Reduced from 1.5rem */
+        line-height: 1.3;
+    }
+
+    /* Caption text size reduction */
+    .caption {
+        font-size: 0.75rem;
+        padding: 0.5rem;
+    }
+
+    /* Footer text adjustment */
+    .footer-magic {
+        font-size: 0.8rem;
+    }
+}
+
+/* Very small devices */
+@media (max-width: 360px) {
+    .carousel-item {
+        width: 160px;
+        height: 240px;
+    }
+    
+    .title-glow {
+        font-size: 1.2rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -377,52 +445,32 @@
             
             const photos = [
                 {
-                    url: "https://images.unsplash.com/photo-1582152629442-4a864303fb96",
+                    url: "rohit/r1.jpg",
                     caption: "Our first adventure together"
                 },
                 {
-                    url: "https://images.unsplash.com/photo-1513279922550-250c2129b13a",
+                    url: "rohit/r2.jpg",
                     caption: "The day we decided forever"
                 },
                 {
-                    url: "https://images.unsplash.com/photo-1517821099606-cef63a9bcda6",
+                    url: "rohit/r3.jpg",
                     caption: "Summer memories together"
                 },
                 {
-                    url: "https://images.unsplash.com/photo-1600603405959-6d623e92445c",
+                    url: "rohit/r4.jpg",
                     caption: "Celebrating our special day"
                 },
                 {
-                    url: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e",
+                    url: "rohit/r5.jpg",
                     caption: "That beautiful sunset"
                 },
                 {
-                    url: "https://images.unsplash.com/photo-1612293682996-6e4a77a3ed47",
+                    url: "rohit/r6.jpg",
                     caption: "Our favorite coffee date"
                 },
                 {
-                    url: "https://images.unsplash.com/photo-1519699047748-de8e457a634e",
+                    url: "rohit/r7.jpg",
                     caption: "Walking in the park"
-                },
-                {
-                    url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2",
-                    caption: "Beach day memories"
-                },
-                {
-                    url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486",
-                    caption: "Dancing in the rain"
-                },
-                {
-                    url: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963",
-                    caption: "Our Italian getaway"
-                },
-                {
-                    url: "https://images.unsplash.com/photo-1523438885200-e635ba2c371e",
-                    caption: "Garden picnic day"
-                },
-                {
-                    url: "https://images.unsplash.com/photo-1516205651411-aef33a44f7c2",
-                    caption: "Sunset at the beach"
                 },
                 
             ];
